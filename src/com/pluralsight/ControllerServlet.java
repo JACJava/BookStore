@@ -18,7 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ControllerServlet
  */
-@WebServlet("/ControllerServlet")
+
+/* 20190329 remove WebServlet identifier and stick it in web.xml file instead      */
+//@WebServlet("/ControllerServlet")
+
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,11 +38,15 @@ public class ControllerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	    // 20190329 added printwriter object
+	    // 20190329 added printwriter object, title
+		
+		// stopped at Getting Data into a Servlet from a form
 		
 		PrintWriter output = response.getWriter();
 		
-		output.println("Hello ControllerServlet Julie again and again and yet again");
+		String title = request.getParameter("title");
+		
+		output.println("Book Title:  " + title);
 		
 	}
 
