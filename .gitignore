@@ -24,3 +24,4 @@ target/
 /.metadata/
 /.recommenders/
 build/classes/com/pluralsight/ControllerServlet.class
+*.class
