@@ -33,7 +33,7 @@ public class ControllerServlet extends HttpServlet {
 		
 		PrintWriter output = response.getWriter();
 		
-		output.println("Hello ControllerServlet Julie");
+		output.println("Hello ControllerServlet Julie again");
 		
 	}
 
