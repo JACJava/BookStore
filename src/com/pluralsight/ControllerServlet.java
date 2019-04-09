@@ -39,14 +39,17 @@ public class ControllerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	    // 20190329 added printwriter object, title
+		// 20190408 added BookForm.html and form reader
 		
-		// stopped at Getting Data into a Servlet from a form
-		
-		PrintWriter output = response.getWriter();
-		
-		String title = request.getParameter("title");
-		
-		output.println("Book Title:  " + title);
+//		PrintWriter output = response.getWriter();
+//		
+//		String title = request.getParameter("title");
+//		String author = request.getParameter("author");
+//		
+//		output.println("Book Title 4/08:  " + title);
+//		output.println();
+//		output.println("Book Author 4/08:  " + author);
+//		
 		
 	}
 
@@ -55,7 +58,16 @@ public class ControllerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		PrintWriter output = response.getWriter();
+		
+		String title = request.getParameter("title");
+		String author = request.getParameter("author");
+		
+		output.println("Book Title 4/08:  " + title);
+		output.println();
+		output.println("Book Author 4/08:  " + author);
+	
 	}
 
 }
