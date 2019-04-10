@@ -3,8 +3,8 @@ package com.pluralsight;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,17 +40,19 @@ public class ControllerServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 	    // 20190329 added printwriter object, title
 		// 20190408 added BookForm.html and form reader
+		// 20190409 moved all the code to the doPost method
+
+//		request.setAttribute("book_title","1984");
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("BookList.jsp");
+//		dispatcher.forward(request, response);
 		
-//		PrintWriter output = response.getWriter();
-//		
-//		String title = request.getParameter("title");
-//		String author = request.getParameter("author");
-//		
-//		output.println("Book Title 4/08:  " + title);
-//		output.println();
-//		output.println("Book Author 4/08:  " + author);
-//		
 		
+		PrintWriter output = response.getWriter();
+		output.println("hello controller servlet again and again");
+		request.setAttribute("book_title","1984 julie again");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/BookList.jsp");
+		dispatcher.forward(request, response);
+	
 	}
 
 	/**
