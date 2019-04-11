@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,13 +25,22 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+ 
+	
+	/* 20190411 Add array list to print out list of books              */
+	//private ArrayList<String> bookTitles = new ArrayList<String>();
+	
+	/* 20190411 Changed array to Book class                           */
+	private ArrayList<Book> bookList = new ArrayList<Book>();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ControllerServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        bookList.add(new Book("To Kill a Mockingbird", "Harper Lee", 5.50f));
+        bookList.add(new Book("1984", "George Orwell", 4.50f));
+        bookList.add(new Book("Frankenstein", "Mary Shelley", 4.00f));
     }
 
 	/**
@@ -39,17 +49,22 @@ public class ControllerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	    // 20190329 added printwriter object, title
+		
+		//PrintWriter output = response.getWriter();
+		//output.println("hello controller servlet again and again");
+		
 		// 20190408 added BookForm.html and form reader
 		// 20190409 moved all the code to the doPost method
-
-//		request.setAttribute("book_title","1984");
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("BookList.jsp");
-//		dispatcher.forward(request, response);
 		
+		// 20190410 added the dispatcher and the /BookList.jsp call
+		//request.setAttribute("book_title","1984 julie again and again and yet again");
 		
-		PrintWriter output = response.getWriter();
-		output.println("hello controller servlet again and again");
-		request.setAttribute("book_title","1984 julie again and again");
+		// 20190411 added the arraylist
+		//request.setAttribute("book_titles", bookTitles);
+		
+		// 20190411 change the arraylist to the Book class
+		request.setAttribute("book_list", bookList);
+				
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/BookList.jsp");
 		dispatcher.forward(request, response);
 	
