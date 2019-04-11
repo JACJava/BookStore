@@ -34,15 +34,22 @@
 
 <%-- 2090411 create column headings           --%>
 <div class = "container">
-	<h1>Book Store</h1>
-	<table>
-		<caption>List of Books</caption>
-		<tr>
-			<th>Title</th>
-			<th>Author</th>
-			<th>Price</th>
-		</tr>
-	</table>
+	<div class ="links">
+		<h1> <a href="list">Book Store</a></h1>
+		<h1> <a href="new">Add New Store</a></h1>
+	</div>
+
+	<div class="booktable">
+		<table>
+			<caption><h2>List of Books</h2></caption>
+			<tr>
+				<th>Title</th>
+				<th>Author</th>
+				<th>Price</th>
+			</tr>		
+		</table>
+	
+	</div>
 </div>
 
 <%-- 2090411 keep the foreach loop so we can create a row            --%>
