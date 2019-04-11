@@ -49,7 +49,7 @@ public class ControllerServlet extends HttpServlet {
 		
 		PrintWriter output = response.getWriter();
 		output.println("hello controller servlet again and again");
-		request.setAttribute("book_title","1984 julie again");
+		request.setAttribute("book_title","1984 julie again and again");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/BookList.jsp");
 		dispatcher.forward(request, response);
 	
