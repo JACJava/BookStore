@@ -63,11 +63,32 @@ public class ControllerServlet extends HttpServlet {
 		//request.setAttribute("book_titles", bookTitles);
 		
 		// 20190411 change the arraylist to the Book class
+		//request.setAttribute("book_list", bookList);		
+		//RequestDispatcher dispatcher = request.getRequestDispatcher("/BookList.jsp");
+		//dispatcher.forward(request, response);
+	
+		// 20190412 added the logic for the links
+		String action = request.getPathInfo();
+		if (action.contentEquals("/new")) {
+			addBook(request, response);
+		}
+		else {
+			listBooks(request, response);
+		}
+			
+		
+	}
+
+	private void listBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("book_list", bookList);
-				
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/BookList.jsp");
 		dispatcher.forward(request, response);
-	
+		
+	}
+
+	private void addBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/BookForm.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

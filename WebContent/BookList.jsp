@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>Insert title here</title>
+<title>Julie's Book Store</title>
 <%-- added stylesheet reference but style sheet was not provided by Pluralsight so grabbed one used in a prior tutorial --%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
 </head>
@@ -35,8 +35,8 @@
 <%-- 2090411 create column headings           --%>
 <div class = "container">
 	<div class ="links">
-		<h1> <a href="list">Book Store</a></h1>
-		<h1> <a href="new">Add New Store</a></h1>
+		<h1><a href="list">Book Store</a></h1>
+		<h1><a href="new">Add New Book</a></h1>
 	</div>
 
 	<div class="booktable">
@@ -47,22 +47,18 @@
 				<th>Author</th>
 				<th>Price</th>
 			</tr>		
+		
+			<%-- 2090411 keep the foreach loop so we can create a row            --%>
+			<c:forEach items="${book_list}" var="item">
+				<tr>
+					<td>${item.getTitle()}</td>
+					<td>${item.getAuthor()}</td>
+					<td>${item.getPrice()}</td>
+				</tr>
+			</c:forEach>
 		</table>
-	
 	</div>
 </div>
-
-<%-- 2090411 keep the foreach loop so we can create a row            --%>
-<c:forEach items="${book_list}" var="item">
-	<tr>
-		<td> ${item.getTitle()} </td>
-		<td> ${item.getAuthor()} </td>
-		<td> ${item.getPrice()} </td>
-	</tr>
-	<br> </br>
-</c:forEach>
-
-
 
 </body>
 </html>
