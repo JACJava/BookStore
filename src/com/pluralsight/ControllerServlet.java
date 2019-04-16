@@ -102,9 +102,9 @@ public class ControllerServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String author = request.getParameter("author");
 		
-		output.println("Book Title 4/08:  " + title);
+		output.println("Book Title:  " + title);
 		output.println("<br/>");
-		output.println("Book Author 4/08:  " + author);
+		output.println("Book Author:  " + author);
 	
 	}
 
