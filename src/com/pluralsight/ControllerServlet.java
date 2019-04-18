@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -31,16 +32,22 @@ public class ControllerServlet extends HttpServlet {
 	//private ArrayList<String> bookTitles = new ArrayList<String>();
 	
 	/* 20190411 Changed array to Book class                           */
-	private ArrayList<Book> bookList = new ArrayList<Book>();
+	//private ArrayList<Book> bookList = new ArrayList<Book>();
+	private BookDAO bookDAO;
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ControllerServlet() {
         super();
-        bookList.add(new Book("To Kill a Mockingbird", "Harper Lee", 5.50f));
-        bookList.add(new Book("1984", "George Orwell", 4.50f));
-        bookList.add(new Book("Frankenstein", "Mary Shelley", 4.00f));
+        
+        bookDAO = new BookDAO();
+        //bookDAO.connect();
+        //bookDAO.disconnect();
+        
+        //bookList.add(new Book("To Kill a Mockingbird", "Harper Lee", 5.50f));
+        //bookList.add(new Book("1984", "George Orwell", 4.50f));
+        //bookList.add(new Book("Frankenstein", "Mary Shelley", 4.00f));
     }
 
 	/**
@@ -69,18 +76,36 @@ public class ControllerServlet extends HttpServlet {
 	
 		// 20190412 added the logic for the links
 		String action = request.getPathInfo();
+		
+		//System.out.println("action" + action);
+		
 		if (action.contentEquals("/new")) {
 			addBook(request, response);
 		}
-		else {
-			listBooks(request, response);
+		else 
+			if (action.contentEquals("/insert")) {
+				insertBook(request, response);
+			}
+			else 
+		
+		{
+			try {
+				listBooks(request, response);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 			
 		
 	}
 
-	private void listBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("book_list", bookList);
+	private void listBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+		/* added database info */
+		//request.setAttribute("book_list", bookList);
+		
+		ArrayList<Book> books = bookDAO.listAllBooks();
+		request.setAttribute("book_list", books);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/BookList.jsp");
 		dispatcher.forward(request, response);
 		
@@ -91,21 +116,41 @@ public class ControllerServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	
+	private void insertBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		//System.out.println("here before");
+		String title = request.getParameter("booktitle");
+		String author = request.getParameter("bookauthor");
+		String priceString = request.getParameter("bookprice");
+		
+		//System.out.println("here after");
+		//System.out.println(title + author + priceString);
+		
+		Book newBook = new Book(title, author, Float.parseFloat(priceString));
+		//bookList.add(newBook);
+		bookDAO.insertBook(newBook);
+
+		response.sendRedirect("list");
+
+	}
+	
+	
+	
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		PrintWriter output = response.getWriter();
-		
-		String title = request.getParameter("title");
-		String author = request.getParameter("author");
-		
-		output.println("Book Title:  " + title);
-		output.println("<br/>");
-		output.println("Book Author:  " + author);
-	
+		String action = request.getPathInfo();
+		if (action.contentEquals("/insert")) {
+			insertBook(request, response);
+		}
 	}
+	
+	
+	
 
 }
