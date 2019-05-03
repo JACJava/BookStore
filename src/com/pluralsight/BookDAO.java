@@ -12,7 +12,7 @@ public class BookDAO {
 
 	private String jdbcURL = "jdbc:mysql://localhost:3306/book_store";
 	private String jdbcUsername = "root";
-	private String jdbcPassword = "zjak25";
+	private String jdbcPassword = "root";
 	private Connection jdbcConnection;
 	
 	public void connect() {
